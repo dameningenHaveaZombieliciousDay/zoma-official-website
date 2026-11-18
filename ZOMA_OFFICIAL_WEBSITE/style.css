@@ -1,0 +1,2535 @@
+
+@charset "UTF-8";
+
+/* =========================================================
+   ZOMA / OFFICIAL WEBSITE
+   メインデザイン設定
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   01. 共通設定（全ページの基本ルール）
+   --------------------------------------------------------- */
+
+/*
+  :root（ルート）
+  サイト全体で使用する色やフォントを登録する場所。
+  --ink などの名前を「CSS変数」と呼ぶ。
+
+  例えば --orange の色を変更すれば、
+  サイト内のオレンジ色をまとめて変更できる。
+*/
+:root {
+  --ink: #171717;       /* メインの黒 */
+  --ink2: #242424;      /* 少し明るい黒 */
+  --paper: #f1f0ec;     /* 背景のアイボリー */
+  --white: #fff;        /* 白 */
+  --orange: #e97832;    /* ゾマのアクセントカラー */
+  --muted: #9a9994;     /* 薄いグレー */
+  --line: rgba(23, 23, 23, .16); /* 区切り線 */
+
+  --mono: "DM Mono", monospace; /* 英数字用フォント */
+  --sans: "Manrope", "Noto Sans JP", sans-serif; /* 本文用フォント */
+}
+
+/*
+  *（アスタリスク）
+  ページ内のすべての要素に適用する共通設定。
+  box-sizing: border-box によって、
+  幅や高さの計算に余分な余白を含める。
+*/
+* {
+  box-sizing: border-box;
+}
+
+/* HTML全体：ページ内リンクを滑らかに移動させる */
+html {
+  scroll-behavior: smooth;
+}
+
+/* BODY：サイト全体の基本デザイン */
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* リンクの基本設定：文字色を継承し、下線を消す */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* ---------------------------------------------------------
+   02. スクロール進行バー
+   --------------------------------------------------------- */
+
+/*
+  ページをスクロールしたとき、上部に表示される細いバー。
+  width は JavaScript から変更される。
+*/
+.page-progress {
+  position: fixed; /* 画面上部に固定 */
+  z-index: 1000;   /* 他の要素より手前に表示 */
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: var(--orange);
+}
+
+
+/* ---------------------------------------------------------
+   03. ヘッダー（サイト最上部のメニュー）
+   --------------------------------------------------------- */
+
+/* ヘッダー全体 */
+.site-header {
+  height: 84px;
+  padding: 0 5.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(241, 240, 236, .94);
+  position: absolute;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, .12);
+}
+
+/* ロゴとサイト名を横並びにする */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ロゴマーク「Z.」の四角い背景 */
+.brand-mark {
+  width: 38px;
+  height: 38px;
+  background: var(--orange);
+  color: #171717;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 20px;
+}
+
+/* ロゴ横のサイト名 */
+.brand-name {
+  font-weight: 800;
+  letter-spacing: .12em;
+  font-size: 14px;
+}
+
+/* サイト名の下にある小さな文字 */
+.brand-name small {
+  display: block;
+  font: 9px var(--mono);
+  letter-spacing: .12em;
+  margin-top: 4px;
+  color: #777;
+}
+
+/* ナビゲーションメニュー */
+.main-nav {
+  display: flex;
+  gap: 30px;
+}
+
+/* メニューとヘッダーのボタンの文字設定 */
+.main-nav a,
+.header-cta {
+  font: 10px var(--mono);
+  letter-spacing: .1em;
+}
+
+/* メニューのリンク */
+.main-nav a {
+  position: relative;
+}
+
+/* マウスを乗せたときに伸びる下線 */
+.main-nav a:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  width: 0;
+  height: 1px;
+  background: var(--orange);
+  transition: .25s;
+}
+
+/* メニューにマウスを乗せたときの動作 */
+.main-nav a:hover:after {
+  width: 100%;
+}
+
+/* FOLLOW X ボタン */
+.header-cta {
+  border: 1px solid var(--ink);
+  padding: 13px 17px;
+}
+
+/* ボタン内の矢印との間隔 */
+.header-cta span,
+.button span {
+  margin-left: 18px;
+}
+
+/* スマートフォン用メニューボタン */
+.menu-toggle {
+  display: none;
+}
+
+
+/* ---------------------------------------------------------
+   04. HERO（トップページのメインビジュアル）
+   --------------------------------------------------------- */
+
+/* トップページ全体の大きな黒いエリア */
+.hero {
+  min-height: 790px;
+  height: 100vh;
+  max-height: 1000px;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 180px 9% 90px;
+
+  /* 左側の文字と右側の画像を2列にする */
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  align-items: center;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* 背景に表示する薄い格子模様 */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+  background-size: 70px 70px;
+  mask-image: linear-gradient(90deg, black, transparent 90%);
+}
+
+/* 背景の大きな円形装飾 */
+.hero:after {
+  content: "";
+  position: absolute;
+  width: 560px;
+  height: 560px;
+  border: 1px solid rgba(233, 120, 50, .18);
+  border-radius: 50%;
+  right: 10%;
+  top: 16%;
+  box-shadow:
+    0 0 0 65px rgba(233, 120, 50, .025),
+    0 0 0 130px rgba(233, 120, 50, .02);
+}
+
+/* 文字と画像を背景装飾より手前に表示 */
+.hero-copy,
+.hero-art {
+  position: relative;
+  z-index: 2;
+}
+
+/* 英語の小見出しなどに使う共通文字設定 */
+.eyebrow,
+.overline,
+.section-kicker,
+.art-index,
+.art-side-label,
+.hero-bottom,
+.card-index,
+.visual-tile span,
+.coming-soon {
+  font: 10px var(--mono);
+  letter-spacing: .16em;
+}
+
+/* HERO上部の小さな説明 */
+.eyebrow {
+  color: #b7b5ae;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* オレンジ色のステータスランプ */
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--orange);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--orange);
+}
+
+/* メインタイトル */
+h1 {
+  font-size: clamp(58px, 7.2vw, 112px);
+  line-height: .94;
+  letter-spacing: -.075em;
+  margin: 32px 0 28px;
+  font-weight: 800;
+}
+
+/* タイトル内の強調文字をオレンジにする */
+h1 em,
+.contact-section h2 em {
+  font-style: normal;
+  color: var(--orange);
+}
+
+/* HEROの短いキャッチコピー */
+.hero-lead {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+/* HEROの紹介文章 */
+.hero-description {
+  font-size: 13px;
+  line-height: 2.1;
+  color: #aaa9a3;
+  margin-top: 22px;
+}
+
+/* HERO内のボタンを横並びにする */
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-top: 38px;
+}
+
+/* 共通ボタンの基本デザイン */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 21px;
+  font: 10px var(--mono);
+  letter-spacing: .1em;
+  min-width: 190px;
+  transition: .25s;
+}
+
+/* 明るい色のボタン */
+.button-dark {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* ボタンにマウスを乗せたとき */
+.button-dark:hover,
+.button-light:hover {
+  background: var(--orange);
+  transform: translateY(-3px);
+}
+
+/* 下線付きテキストリンク */
+.text-link {
+  font: 10px var(--mono);
+  letter-spacing: .1em;
+  border-bottom: 1px solid #777;
+  padding-bottom: 7px;
+}
+
+/* テキストリンクの矢印 */
+.text-link span {
+  margin-left: 8px;
+}
+
+
+/* ---------------------------------------------------------
+   05. HEROの画像エリア・立ち絵
+   --------------------------------------------------------- */
+
+/*
+  hero-art：画像エリア全体の大きさ。
+  height を変更すると画像を置くスペースが変わる。
+*/
+.hero-art {
+  height: 470px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 立ち絵を囲むフレーム */
+.art-frame {
+  width: min(100%, 390px);
+  height: 440px;
+  border: 1px solid rgba(255, 255, 255, .23);
+  position: relative;
+  background: linear-gradient(145deg, rgba(255, 255, 255, .08), transparent 55%);
+  overflow: hidden;
+}
+
+/* フレーム内の横線・縦線 */
+.art-frame:before,
+.art-frame:after {
+  content: "";
+  position: absolute;
+  background: var(--orange);
+}
+
+/* フレーム内の横線 */
+.art-frame:before {
+  height: 1px;
+  width: 80%;
+  top: 25%;
+  left: 10%;
+  opacity: .5;
+}
+
+/* フレーム内の縦線 */
+.art-frame:after {
+  width: 1px;
+  height: 75%;
+  left: 50%;
+  top: 12%;
+  opacity: .3;
+}
+
+/* 画像の背後にある円形装飾 */
+.art-orbit {
+  position: absolute;
+  border: 1px solid rgba(233, 120, 50, .42);
+  border-radius: 50%;
+  width: 270px;
+  height: 270px;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+}
+
+/* 2つ目の円形装飾 */
+.orbit-two {
+  width: 205px;
+  height: 205px;
+  border-color: rgba(255, 255, 255, .18);
+}
+
+/* 右上の十字マーク */
+.art-cross {
+  position: absolute;
+  right: 25px;
+  top: 48px;
+  color: var(--orange);
+  font-size: 28px;
+}
+
+/* フレーム左上の番号 */
+.art-index {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #aaa;
+}
+
+/*
+  art-placeholder：画像を置くための領域。
+  HTMLでは <div class="art-placeholder"> の部分。
+
+  position: absolute によりフレームいっぱいに配置する。
+*/
+.art-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: rgba(255, 255, 255, .7);
+  font-size: 39px;
+  font-weight: 800;
+  letter-spacing: .05em;
+  line-height: 1.1;
+}
+
+/*
+  ★追加：ゾマのメイン立ち絵
+
+  HTMLの class="main-character" に対応する設定。
+
+  width: 100%  → 横幅を枠に合わせる
+  height: 100% → 高さを枠に合わせる
+  object-fit: contain → 画像全体を切らずに表示
+  object-position → 表示位置を調整する
+*/
+
+/* メインビジュアル：バストアップ表示 */
+.art-placeholder img.main-character {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center -20%;
+  display: block;
+  transform: scale(1.40);
+}
+
+
+/* 仮画像用の小さな説明文 */
+.art-placeholder small {
+  font: 9px var(--mono);
+  letter-spacing: .08em;
+  color: #888;
+  margin-top: 16px;
+}
+
+/* フレーム右下の装飾文字 */
+.art-side-label {
+  position: absolute;
+  bottom: 20px;
+  right: 18px;
+  color: var(--orange);
+  text-align: right;
+  line-height: 1.7;
+}
+
+/* HERO右下の丸いスタンプ */
+.hero-stamp {
+  position: absolute;
+  right: -10px;
+  bottom: 4px;
+  background: var(--orange);
+  color: var(--ink);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(12deg);
+  font: 9px var(--mono);
+  text-align: center;
+}
+
+/* スタンプ内の強調文字 */
+.hero-stamp b {
+  font: 700 12px var(--sans);
+  margin-top: 5px;
+}
+
+/* HERO最下部のスクロール案内 */
+.hero-bottom {
+  position: absolute;
+  bottom: 35px;
+  left: 9%;
+  right: 9%;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: #85847f;
+}
+
+/* スクロール案内の横線 */
+.scroll-line {
+  height: 1px;
+  background: #555;
+  flex: 1;
+}
+
+/* 最後の文字をオレンジにする */
+.hero-bottom span:last-child {
+  color: var(--orange);
+}
+
+
+/* ---------------------------------------------------------
+   06. TICKER（横に流れる文字エリア）
+   --------------------------------------------------------- */
+
+/* オレンジ色の帯 */
+.ticker {
+  background: var(--orange);
+  overflow: hidden;
+  padding: 17px 0;
+  color: var(--ink);
+}
+
+/* 帯の中の文字を横並びにする */
+.ticker-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 36px;
+  white-space: nowrap;
+  font: 11px var(--mono);
+  letter-spacing: .17em;
+}
+
+/* 帯の中の強調文字 */
+.ticker-track b {
+  font-size: 17px;
+}
+
+
+/* ---------------------------------------------------------
+   07. ABOUT（ゾマの紹介・コンセプト）
+   --------------------------------------------------------- */
+
+/* セクション共通の余白 */
+.section {
+  padding: 120px 9%;
+}
+
+/* セクション番号・見出し */
+.section-kicker {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+  color: #777;
+}
+
+/* ABOUTの文章を左右2列に配置 */
+.about-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
+  padding: 75px 0 65px;
+}
+
+/* セクション上部の小見出し */
+.overline {
+  color: #8b8982;
+  margin: 0 0 22px;
+}
+
+/* ABOUTの大きなタイトル */
+.about-layout h2,
+.section-heading h2 {
+  font-size: clamp(48px, 6vw, 82px);
+  line-height: 1.08;
+  letter-spacing: -.07em;
+  margin: 0;
+  font-weight: 800;
+}
+
+/* タイトルの一部をオレンジにする */
+.about-layout h2 span,
+.section-heading h2 span {
+  color: var(--orange);
+}
+
+/* ABOUTの説明文エリア */
+.about-text {
+  padding-top: 40px;
+  max-width: 460px;
+}
+
+/* ABOUTの本文 */
+.about-text p {
+  font-size: 14px;
+  line-height: 2.15;
+  color: #696862;
+}
+
+/* ABOUTの重要な説明文 */
+.about-text .lead {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 22px;
+}
+
+/* 下線付きリンク */
+.underlined-link {
+  display: inline-block;
+  font: 10px var(--mono);
+  letter-spacing: .12em;
+  margin-top: 20px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--ink);
+}
+
+/* リンク内の矢印 */
+.underlined-link span {
+  margin-left: 20px;
+}
+
+/* ABOUTの数値・プロフィール情報 */
+.about-facts {
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 1.2fr;
+  padding-top: 28px;
+  align-items: end;
+}
+
+/* 数値情報の縦並び */
+.about-facts div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+/* 数値の大きさ */
+.about-facts strong {
+  font-size: 42px;
+  letter-spacing: -.06em;
+}
+
+/* 数値の横にある単位 */
+.about-facts strong span {
+  font-size: 18px;
+  color: var(--orange);
+  margin-left: 3px;
+}
+
+/* 数値の説明ラベル */
+.about-facts small {
+  font: 9px var(--mono);
+  letter-spacing: .15em;
+  color: #888;
+}
+
+/* 数値エリアの補足文 */
+.about-facts p {
+  font-size: 10px;
+  color: #888;
+  text-align: right;
+}
+
+
+/* ---------------------------------------------------------
+   08. PROFILE（プロフィール）
+   --------------------------------------------------------- */
+
+/* プロフィールセクション全体 */
+.profile-section {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 100px 9% 110px;
+}
+
+/* 明るい背景用の文字色 */
+.light {
+  color: #aaa;
+}
+
+/* プロフィール画像と説明を左右に配置 */
+.profile-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
+  align-items: center;
+  padding-top: 65px;
+}
+
+/* プロフィール画像の外枠 */
+.profile-visual {
+  height: 540px;
+  border: 1px solid #444;
+  padding: 16px;
+}
+
+/* プロフィール画像の内側 */
+.profile-visual-inner {
+  height: 100%;
+  background: radial-gradient(circle at 50% 40%, #3c342e 0, #242424 42%, #1b1b1b 74%);
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+/* プロフィール画像の円形装飾 */
+.profile-visual-inner:before,
+.profile-visual-inner:after {
+  content: "";
+  position: absolute;
+  z-index: 0; /* 円形装飾を背景側に配置 */
+
+  border: 1px solid rgba(233, 120, 50, .35);
+  border-radius: 50%;
+  width: 340px;
+  height: 340px;
+}
+
+/* 内側の円 */
+.profile-visual-inner:after {
+  width: 260px;
+  height: 260px;
+  border-color: #555;
+}
+
+/* 立ち絵を円形装飾より前に配置 */
+.profile-character {
+  position: relative;
+  z-index: 1;
+}
+
+/* プロフィール画像の番号 */
+.file-number {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font: 10px var(--mono);
+  color: #aaa;
+}
+
+/* プロフィール画像が未設定の場合の仮文字 */
+.profile-placeholder {
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1.05;
+  text-align: center;
+  color: #777;
+  z-index: 1;
+}
+
+/* 画像下部の説明文字 */
+.visual-note {
+  position: absolute;
+  bottom: 20px;
+  font: 9px var(--mono);
+  color: #999;
+  letter-spacing: .1em;
+}
+
+/* オレンジ色の文字 */
+.orange {
+  color: var(--orange);
+}
+
+/* プロフィールの名前 */
+.profile-info h2 {
+  font-size: clamp(48px, 6vw, 76px);
+  margin: 0;
+  letter-spacing: -.07em;
+}
+
+/* 名前の一部をオレンジにする */
+.profile-info h2 span {
+  color: var(--orange);
+}
+
+/* 名前の下にある英語表記 */
+.profile-en {
+  font: 11px var(--mono);
+  letter-spacing: .2em;
+  color: #999;
+  margin: 10px 0 35px;
+}
+
+/* プロフィール紹介文 */
+.profile-desc {
+  font-size: 13px;
+  line-height: 2.1;
+  color: #bbb;
+  max-width: 440px;
+}
+
+/* プロフィール情報一覧の上枠 */
+.profile-info dl {
+  margin: 35px 0 40px;
+  border-top: 1px solid #444;
+}
+
+/* 情報を項目名と内容の2列にする */
+.profile-info dl div {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  padding: 15px 0;
+  border-bottom: 1px solid #444;
+}
+
+/* 情報の項目名 */
+.profile-info dt {
+  font: 10px var(--mono);
+  letter-spacing: .12em;
+  color: #888;
+}
+
+/* 情報の内容 */
+.profile-info dd {
+  margin: 0;
+  font-size: 12px;
+}
+
+/* 明るい色のボタン */
+.button-light {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+
+/* ---------------------------------------------------------
+   09. ACTIVITY（活動・SNS）
+   --------------------------------------------------------- */
+
+/* 活動セクション下部の余白 */
+.activity-section {
+  padding-bottom: 130px;
+}
+
+/* 活動セクションの見出し */
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  padding: 65px 0 55px;
+}
+
+/* 活動セクションの補足文 */
+.section-heading > p {
+  font-size: 13px;
+  line-height: 2;
+  color: #777;
+}
+
+/* SNSカードを3列に並べる */
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+/* SNSカード1枚分 */
+.activity-card {
+  padding: 28px 25px 35px;
+  min-height: 250px;
+  position: relative;
+  border-right: 1px solid var(--line);
+  transition: .25s;
+}
+
+/* 最後のカードだけ右の線を消す */
+.activity-card:last-child {
+  border: 0;
+}
+
+/* カードにマウスを乗せたとき */
+.activity-card:hover {
+  background: #e6e3dc;
+}
+
+/* カード番号 */
+.card-index {
+  color: #999;
+}
+
+/* SNSアイコン */
+.activity-icon {
+  display: block;
+  font-size: 29px;
+  margin: 25px 0 12px;
+  color: var(--orange);
+}
+
+/* SNS名 */
+.activity-card h3 {
+  font-size: 22px;
+  margin: 0 0 10px;
+  letter-spacing: .02em;
+}
+
+/* SNSの説明 */
+.activity-card p {
+  font-size: 11px;
+  color: #777;
+}
+
+/* カード右下の矢印 */
+.card-arrow {
+  position: absolute;
+  right: 25px;
+  bottom: 28px;
+  font-size: 22px;
+}
+
+
+/* ---------------------------------------------------------
+   10. VISUAL（イラスト・ビジュアルギャラリー）
+   --------------------------------------------------------- */
+
+/* VISUALセクション全体 */
+.visual-section {
+  background: #e4e1da;
+  padding: 105px 9%;
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 8%;
+  align-items: center;
+}
+
+/* VISUALの大見出し */
+.visual-copy h2 {
+  font-size: clamp(45px, 5vw, 68px);
+  line-height: .98;
+  letter-spacing: -.07em;
+  margin: 0 0 25px;
+}
+
+/* 見出しの一部をオレンジにする */
+.visual-copy h2 span {
+  color: var(--orange);
+}
+
+/* VISUALの説明文 */
+.visual-copy > p:not(.overline) {
+  font-size: 12px;
+  line-height: 2;
+  color: #777;
+}
+
+/* COMING SOONの表示 */
+.coming-soon {
+  display: inline-block;
+  margin-top: 30px;
+  color: #999;
+}
+
+/* ギャラリーの画像一覧 */
+.visual-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  grid-template-rows: 170px 170px;
+  gap: 12px;
+}
+
+/* ギャラリー画像1枚分の共通設定 */
+.visual-tile {
+  background: #c9c5bc;
+  position: relative;
+  padding: 15px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  color: #777;
+  overflow: hidden;
+}
+
+/* ギャラリー内の円形装飾 */
+.visual-tile:before {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgba(233, 120, 50, .55);
+  border-radius: 50%;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ギャラリー画像のタイトル */
+.visual-tile b {
+  font: 11px var(--mono);
+}
+
+/* ギャラリー画像の番号 */
+.visual-tile span {
+  font-size: 9px;
+}
+
+/* 大きなギャラリー画像 */
+.tile-large {
+  grid-row: span 2;
+  background: #292929;
+  color: #aaa;
+}
+
+/* 大きな画像の円形装飾 */
+.tile-large:before {
+  width: 230px;
+  height: 230px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-color: #9b542e;
+}
+
+
+
+/* ---------------------------------------------------------
+   11. CONTACT（お問い合わせ）
+   --------------------------------------------------------- */
+
+/* お問い合わせセクション全体 */
+.contact-section {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 100px 9% 110px;
+
+  /* セクションの横幅を画面いっぱいに確保 */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* セクション上部の小見出し */
+.contact-section > .overline {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+/* 大きなCONTACT見出し */
+.contact-section h2 {
+  width: 100%;
+  font-size: clamp(60px, 9vw, 120px);
+  line-height: .9;
+  letter-spacing: -.08em;
+  margin: 0 0 30px;
+}
+
+/* お問い合わせの説明 */
+.contact-lead {
+  width: 100%;
+  max-width: none;
+  font-size: 13px;
+  color: #aaa;
+  line-height: 2;
+  margin: 0;
+}
+
+/* オレンジ色のお問い合わせボタン */
+.button-orange {
+  background: var(--orange);
+  color: var(--ink);
+  margin-top: 25px;
+}
+
+/* お問い合わせボタンにマウスを乗せたとき */
+.button-orange:hover {
+  background: var(--paper);
+  transform: translateY(-3px);
+}
+
+/* DM管理などの補足説明 */
+.contact-note {
+  font-size: 10px;
+  color: #777;
+  margin-top: 25px;
+}
+
+/* ---------------------------------------------------------
+   12. FOOTER（サイト最下部）
+   --------------------------------------------------------- */
+
+/* フッター全体 */
+.site-footer {
+  background: #101010;
+  color: #eee;
+  padding: 35px 9%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 18px;
+  align-items: center;
+}
+
+/* フッターのロゴ */
+.footer-brand {
+  width: 42px;
+  height: 42px;
+  background: var(--orange);
+  color: #171717;
+  display: grid;
+  place-items: center;
+  font-size: 23px;
+  font-weight: 900;
+}
+
+/* フッターのサイト名と補足をブロック表示 */
+.site-footer div strong,
+.site-footer div small {
+  display: block;
+}
+
+/* フッターのサイト名 */
+.site-footer div strong {
+  font-size: 11px;
+  letter-spacing: .1em;
+}
+
+/* コピーライトや補足リンクの文字設定 */
+.site-footer div small,
+.copyright,
+.back-top {
+  font: 9px var(--mono);
+  color: #777;
+  letter-spacing: .1em;
+  margin-top: 6px;
+}
+
+/* ページ上部へ戻るリンク */
+.back-top {
+  color: #bbb;
+}
+
+/* コピーライトの配置 */
+.copyright {
+  grid-column: 2 / 4;
+  margin: 0;
+}
+
+
+/* =========================================================
+   13. レスポンシブデザイン（タブレット対応）
+   画面幅が900px以下になったときに適用する。
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  /* ナビゲーションの間隔を狭くする */
+  .main-nav {
+    gap: 16px;
+  }
+
+  /* メニュー文字を小さくする */
+  .main-nav a {
+    font-size: 9px;
+  }
+
+  /* HEROの左右余白を減らす */
+  .hero {
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  /* HERO画像エリアを少し縮小 */
+  .hero-art {
+    transform: scale(.9);
+  }
+
+  /* 各セクションの左右余白を調整 */
+  .section,
+  .profile-section,
+  .visual-section,
+  .contact-section {
+    padding-left: 7%;
+    padding-right: 7%;
+  }
+}
+
+
+/* =========================================================
+   14. レスポンシブデザイン（スマートフォン対応）
+   画面幅が700px以下になったときに適用する。
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  /* スマホ用ヘッダー */
+  .site-header {
+    height: 70px;
+    padding: 0 6%;
+  }
+
+  /* スマホではFOLLOW Xボタンを非表示 */
+  .header-cta {
+    display: none;
+  }
+
+  /* 三本線のメニューボタンを表示 */
+  .menu-toggle {
+    display: flex;
+    background: none;
+    border: 0;
+    width: 34px;
+    height: 34px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  /* 三本線それぞれのデザイン */
+  .menu-toggle span {
+    height: 1px;
+    width: 24px;
+    background: var(--ink);
+  }
+
+  /* スマホ用ナビゲーション */
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    padding: 25px 7%;
+    background: var(--paper);
+    flex-direction: column;
+    gap: 23px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* JavaScriptでopenクラスが付いたときに表示 */
+  .main-nav.open {
+    display: flex;
+  }
+
+  /* スマホ用メニュー文字 */
+  .main-nav a {
+    font-size: 11px;
+  }
+
+  /* スマホではHEROを縦並びに変更 */
+  .hero {
+    height: auto;
+    min-height: 850px;
+    max-height: none;
+    padding: 145px 7% 100px;
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  /* スマホ用タイトルの大きさ */
+  .hero h1 {
+    font-size: clamp(54px, 13vw, 85px);
+  }
+
+  /* スマホ用の画像エリア */
+  .hero-art {
+    height: 340px;
+    transform: none;
+  }
+
+  /* スマホ用画像フレーム */
+  .art-frame {
+    height: 320px;
+    width: 75%;
+  }
+
+  /* 背景の円形装飾の位置とサイズ */
+  .hero:after {
+    width: 360px;
+    height: 360px;
+    right: -20%;
+    top: 47%;
+  }
+
+  /* スマホ用スタンプ */
+  .hero-stamp {
+    right: 2%;
+    bottom: -5px;
+    width: 78px;
+    height: 78px;
+  }
+
+  /* スマホ用スクロール案内 */
+  .hero-bottom {
+    left: 7%;
+    right: 7%;
+    bottom: 25px;
+    font-size: 8px;
+  }
+
+  /* 横に流れる文字の間隔 */
+  .ticker-track {
+    justify-content: flex-start;
+    gap: 25px;
+  }
+
+  /* 通常セクションのスマホ用余白 */
+  .section {
+    padding: 80px 7%;
+  }
+
+  /* セクション見出しの文字 */
+  .section-kicker {
+    font-size: 9px;
+  }
+
+  /*
+    ABOUT・PROFILE・VISUALを縦並びに変更。
+    1fr は1列で表示するという意味。
+  */
+  .about-layout,
+  .profile-layout,
+  .visual-section {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  /* ABOUTのスマホ用余白 */
+  .about-layout {
+    padding: 50px 0 45px;
+  }
+
+  /* ABOUTの文章の上部余白を消す */
+  .about-text {
+    padding-top: 0;
+  }
+
+  /* ABOUTの数値を3列にする */
+  .about-facts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* ABOUTの補足文を最下段に配置 */
+  .about-facts p {
+    grid-column: 1 / -1;
+    text-align: left;
+    margin-top: 20px;
+  }
+
+  /* PROFILEのスマホ用余白 */
+  .profile-section {
+    padding: 80px 7%;
+  }
+
+  /* PROFILEの画像と説明の間隔 */
+  .profile-layout {
+    padding-top: 40px;
+  }
+
+  /* PROFILE画像の高さ */
+  .profile-visual {
+    height: 390px;
+  }
+
+  /* PROFILE仮文字の大きさ */
+  .profile-placeholder {
+    font-size: 38px;
+  }
+
+  /* ACTIVITYの見出しを縦並びに */
+  .section-heading {
+    padding: 45px 0 35px;
+    display: block;
+  }
+
+  /* ACTIVITYの補足文 */
+  .section-heading > p {
+    margin-top: 25px;
+  }
+
+  /* SNSカードを1列に変更 */
+  .activity-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* スマホ用SNSカード */
+  .activity-card {
+    min-height: 190px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* 最後のカードの下線を消す */
+  .activity-card:last-child {
+    border-bottom: 0;
+  }
+
+  /* スマホ用SNSアイコンの余白 */
+  .activity-icon {
+    margin: 18px 0 8px;
+  }
+
+  /* VISUALのスマホ用余白 */
+  .visual-section {
+    padding: 80px 7%;
+  }
+
+  /* VISUALギャラリーの高さ */
+  .visual-grid {
+    grid-template-rows: 135px 135px;
+  }
+
+  /* CONTACTのスマホ用余白 */
+  .contact-section {
+    padding: 80px 7%;
+  }
+
+  /* CONTACTの見出し上部余白 */
+  .contact-section > .overline {
+    margin-top: 55px;
+  }
+
+  /* フッターをスマホ向けに2列へ変更 */
+  .site-footer {
+    padding: 28px 7%;
+    grid-template-columns: auto 1fr;
+  }
+
+  /* BACK TO TOPを独立した行に */
+  .back-top {
+    grid-column: 1 / -1;
+  }
+
+  /* コピーライトも独立した行に */
+  .copyright {
+    grid-column: 1 / -1;
+  }
+
+  /* スマホ用ボタンの幅 */
+  .button {
+    min-width: 175px;
+  }
+
+  /* HERO内のボタン間隔 */
+  .hero-actions {
+    gap: 20px;
+  }
+
+  /* スマホ用テキストリンク */
+  .text-link {
+    font-size: 9px;
+  }
+}
+
+
+/* =========================================================
+   15. アニメーションを減らす設定
+   ========================================================= */
+
+/*
+  prefers-reduced-motion:
+  端末側で動きを減らす設定をしている人向けの配慮。
+  スクロールやアニメーションを控えめにする。
+*/
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *:before,
+  *:after {
+    transition: none !important;
+  }
+}
+/* =========================================================
+   16. メインビジュアルの重なり順を調整
+   ========================================================= */
+
+/*
+  z-index（ゼットインデックス）は、要素の重なり順を決める数値。
+  数字が大きい要素ほど手前に表示される。
+*/
+
+/* 装飾を配置するフレーム */
+.art-frame {
+  isolation: isolate;
+}
+
+/* フレーム内の横線・縦線を背面へ */
+.art-frame::before,
+.art-frame::after {
+  z-index: 0;
+}
+
+/* 右上の十字マークも背面へ */
+.art-cross {
+  z-index: 0;
+}
+
+/* ゾマの立ち絵を最前面へ */
+.art-placeholder img.main-character {
+  position: relative;
+  z-index: 1;
+}
+
+/* ========================================
+   メインロゴ
+   ======================================== */
+
+/* ロゴ画像を配置するエリア */
+.hero-logo {
+  width: 100%;
+  max-width: 400px; /* ロゴの最大横幅 */
+  margin: 0 0 24px; /* 下側の余白 */
+}
+
+/* ロゴ画像本体 */
+.hero-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+/* ========================================
+   HERO SD CHARACTER
+   ヒーローエリアに配置するSDイラスト
+======================================== */
+
+/* SDイラストの配置エリア */
+.hero-sd {
+  position: absolute;
+  right: -5%;
+  bottom: -10%;
+  width: 220px; /* SDイラストの表示幅 */
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* SDイラスト本体 */
+.hero-sd img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+
+  /* イラストの角度調整 */
+  transform: rotate(15deg);
+}
+/* ========================================
+   PROFILE CHARACTER
+   プロフィール欄のキャラクター画像
+======================================== */
+
+/* 立ち絵の表示設定 */
+.profile-character {
+  display: block;
+  width: 100%;
+  height: 4000%;
+  object-fit: contain; /* 画像全体を枠内に収める */
+  object-position: center bottom; /* 下端を基準に配置 */
+  transform: translateY(-20440px); /* 上に20px移動 */
+}
+
+
+/* ========================================
+   VISUAL SLIDER
+   ビジュアル作品のスライダー
+======================================== */
+
+/* スライダー全体 */
+.visual-slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 画像を横一列に並べるレール */
+.visual-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.6s ease;
+}
+
+/* 作品1枚分の枠 */
+.visual-slide {
+  flex: 0 0 calc(33.333% - 14px);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #242424;
+}
+
+/* 作品画像 */
+.visual-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain; /* 画像全体を表示して切り取らない */
+  object-position: center;
+
+  transition: transform 0.5s ease;
+}
+
+/* マウスを乗せたときの演出 */
+.visual-slide:hover img {
+  transform: scale(1.04);
+}
+
+/* 操作ボタンのエリア */
+.visual-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+/* 左右のボタン */
+.visual-controls button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* スマホ表示 */
+@media (max-width: 768px) {
+  .visual-slide {
+    flex: 0 0 80%;
+  }
+}
+
+/* ---------------------------------------------------------
+   12. LIVE TOOLS（配信ツール）
+   配信企画で使用する専用ツールエリア
+   --------------------------------------------------------- */
+
+/* 配信ツールセクション全体 */
+.live-tools-section {
+  background: var(--ink2);
+  color: var(--paper);
+  padding: 100px 9% 110px;
+}
+
+/* セクションタイトル周辺 */
+.live-tools-heading {
+  margin-top: 65px;
+  margin-bottom: 55px;
+}
+
+/* TOOLS FOR STREAMING */
+.live-tools-heading > .overline {
+  margin-bottom: 20px;
+}
+
+/* STREAM SUPPORT. */
+.live-tools-heading h2 {
+  font-size: clamp(60px, 9vw, 120px);
+  line-height: .9;
+  letter-spacing: -.08em;
+  margin: 0 0 25px;
+}
+
+/* タイトル内のアクセント文字 */
+.live-tools-heading h2 span {
+  color: var(--orange);
+}
+
+/* セクションの説明文 */
+.live-tools-heading > p:last-child {
+  font-size: 13px;
+  color: #aaa;
+  line-height: 2;
+}
+
+/* 4つのツールカードを並べるエリア */
+.live-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* ツールカード共通デザイン */
+.live-tool-card {
+  background: #202020;
+  border: 1px solid rgba(255,255,255,.12);
+  padding: 35px;
+  min-height: 230px;
+  transition: border-color .3s ease,
+              transform .3s ease;
+}
+
+/* カードにマウスを乗せたとき */
+.live-tool-card:hover {
+  border-color: var(--orange);
+  transform: translateY(-4px);
+}
+
+/* カード番号 */
+.tool-number {
+  display: block;
+  color: var(--orange);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: .08em;
+  margin-bottom: 25px;
+}
+
+/* ツール名 */
+.live-tool-card h3 {
+  font-size: 20px;
+  margin: 0 0 12px;
+}
+
+/* ツールの説明 */
+.live-tool-card > p {
+  font-size: 12px;
+  color: #999;
+  line-height: 1.8;
+}
+
+/* 機能準備中の表示エリア */
+.tool-content {
+  margin-top: 30px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,.12);
+}
+
+/* COMING SOON */
+.tool-content span {
+  color: #777;
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: .12em;
+}
+
+/* スマートフォン表示 */
+@media (max-width: 700px) {
+
+  .live-tools-section {
+    padding: 80px 7%;
+  }
+
+  .live-tools-heading {
+    margin-top: 45px;
+    margin-bottom: 35px;
+  }
+
+  /* スマホではカードを1列にする */
+  .live-tools-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .live-tool-card {
+    padding: 25px;
+    min-height: 200px;
+  }
+
+}
+
+/* ---------------------------------------------------------
+   13. ENTRANCE COUNTER（入室耐久カウンター）
+   --------------------------------------------------------- */
+
+/* カウント数字の表示エリア */
+.counter-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 10px;
+  margin-top: 20px;
+  background: #171717;
+}
+
+/* 大きなカウント数字 */
+.counter-display span {
+  color: var(--orange);
+  font-family: "DM Mono", monospace;
+  font-size: clamp(48px, 7vw, 72px);
+  line-height: 1;
+  font-weight: 700;
+}
+
+/* VISITORSの文字 */
+.counter-display small {
+  color: #888;
+  font-size: 10px;
+  letter-spacing: .15em;
+  margin-top: 12px;
+}
+
+/* ボタンを横並びにする */
+.counter-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* カウンターボタン共通 */
+.counter-buttons button {
+  flex: 1;
+  min-height: 42px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: transparent;
+  color: var(--paper);
+  font-size: 13px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+/* ＋1ボタン */
+#entrance-plus {
+  background: var(--orange);
+  color: var(--ink);
+  border-color: var(--orange);
+}
+
+/* ボタンにマウスを乗せたとき */
+.counter-buttons button:hover {
+  border-color: var(--orange);
+  opacity: .8;
+}
+
+/* スマートフォン表示 */
+@media (max-width: 700px) {
+  .counter-buttons {
+    flex-wrap: wrap;
+  }
+}
+
+/* ---------------------------------------------------------
+   14. PREFECTURE COUNTER（都道府県耐久）
+   --------------------------------------------------------- */
+
+/* 集計結果を横並びに表示 */
+.prefecture-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+/* 集計カード */
+.prefecture-stat {
+  background: #171717;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 集計数字 */
+.prefecture-stat span {
+  color: var(--orange);
+  font-family: "DM Mono", monospace;
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1;
+}
+
+/* 集計ラベル */
+.prefecture-stat small {
+  color: #888;
+  font-size: 9px;
+  letter-spacing: .08em;
+}
+
+/* 都道府県の入力エリア */
+.prefecture-input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+/* 入力欄のラベル */
+.prefecture-input-area label {
+  color: #aaa;
+  font-size: 11px;
+}
+
+/* 都道府県選択欄 */
+#prefecture-select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  background: #171717;
+  color: var(--paper);
+  border: 1px solid rgba(255,255,255,.2);
+  font-size: 13px;
+  border-radius: 0;
+}
+
+/* 回答追加ボタン */
+#prefecture-add {
+  min-height: 48px;
+  background: var(--orange);
+  color: var(--ink);
+  border: 1px solid var(--orange);
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+/* ボタンのホバー */
+#prefecture-add:hover {
+  background: var(--paper);
+  border-color: var(--paper);
+}
+
+/* 日本地図の表示エリア */
+.prefecture-map-area {
+  margin-top: 35px;
+  padding: 20px;
+  background: #171717;
+}
+
+/* 地図エリアの見出し */
+.prefecture-map-heading {
+  display: flex;
+  justify-content: space-between;
+  color: #888;
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: .08em;
+  margin-bottom: 20px;
+}
+
+/* 日本地図の表示枠 */
+.japan-map {
+  width: 100%;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* SVG地図を枠内に収める */
+.japan-map svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+}
+
+/* 地図の未回答エリア */
+.japan-map .prefecture-shape {
+  fill: #fff;
+  stroke: #555;
+  stroke-width: 1;
+  transition: fill .25s ease;
+}
+
+/* 地図の回答済みエリア */
+.japan-map .prefecture-shape.answered {
+  fill: #299B61;
+}
+
+/* 地図の色の説明 */
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+/* 凡例の各項目 */
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #aaa;
+  font-size: 10px;
+}
+
+/* 凡例の色見本 */
+.legend-color {
+  width: 11px;
+  height: 11px;
+  display: inline-block;
+  border: 1px solid #777;
+}
+
+/* 回答ありの色 */
+.legend-color.answered {
+  background: #299B61;
+  border-color: #299B61;
+}
+
+/* 未回答の色 */
+.legend-color.unanswered {
+  background: #fff;
+  border-color: #aaa;
+}
+
+/* 都道府県一覧エリア */
+.prefecture-list-area {
+  margin-top: 35px;
+}
+
+/* 一覧の見出し */
+.prefecture-list-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+  color: #aaa;
+  font-size: 10px;
+}
+
+/* 都道府県一覧 */
+.prefecture-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+/* 県ごとの回答人数カード */
+.prefecture-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px 10px;
+  background: #171717;
+  border: 1px solid rgba(255,255,255,.1);
+}
+
+/* 県名 */
+.prefecture-item-name {
+  color: #bbb;
+  font-size: 11px;
+}
+
+/* 回答人数 */
+.prefecture-item-count {
+  color: var(--orange);
+  font-family: "DM Mono", monospace;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* RESETボタン */
+.prefecture-reset {
+  width: 100%;
+  min-height: 42px;
+  margin-top: 25px;
+  background: transparent;
+  color: #999;
+  border: 1px solid rgba(255,255,255,.2);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: .1em;
+  cursor: pointer;
+}
+
+/* RESETボタンのホバー */
+.prefecture-reset:hover {
+  color: var(--orange);
+  border-color: var(--orange);
+}
+
+/* スマートフォン表示 */
+@media (max-width: 700px) {
+
+  .prefecture-map-area {
+    padding: 14px;
+  }
+
+  .prefecture-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .prefecture-stat {
+    padding: 16px 12px;
+  }
+
+}
+
+
+/* 都道府県一覧の操作ボタン */
+.prefecture-item-buttons {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+/* ＋・−ボタン共通 */
+.prefecture-item-buttons button {
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  background: transparent;
+  color: var(--paper);
+  border: 1px solid rgba(255,255,255,.2);
+  cursor: pointer;
+}
+
+/* ボタンにマウスを乗せたとき */
+.prefecture-item-buttons button:hover:not(:disabled) {
+  color: var(--orange);
+  border-color: var(--orange);
+}
+
+/* 0人のときの−ボタン */
+.prefecture-item-buttons button:disabled {
+  opacity: .3;
+  cursor: not-allowed;
+}
+/* 県名が長い場合のはみ出し防止 */
+.prefecture-item-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* ======================================
+   BUDGET DICE（予算ダイス）
+   硬貨の記録・集計エリア
+====================================== */
+
+/* 硬貨一覧：2列で配置 */
+.dice-count-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* 硬貨1種類ごとの記録カード */
+.dice-count-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 8px;
+  padding: 14px;
+  background: var(--ink2);
+  border: 1px solid var(--line);
+}
+
+/* 硬貨の名前 */
+.dice-count-item > span:first-child {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* 記録回数 */
+.dice-count-item strong {
+  font-family: var(--mono);
+  font-size: 20px;
+  color: var(--orange);
+}
+
+/* 回数の単位 */
+.dice-count-item > span:nth-child(3) {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ＋／−ボタン共通 */
+.dice-count-item button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--white);
+  cursor: pointer;
+  font-size: 16px;
+  transition: background .2s ease, color .2s ease;
+}
+
+/* ＋ボタン */
+.dice-count-item button[data-action="plus"]:hover {
+  background: var(--orange);
+  color: var(--ink);
+}
+
+/* −ボタン */
+.dice-count-item button[data-action="minus"]:hover {
+  background: var(--white);
+  color: var(--ink);
+}
+
+/* 合計金額・総出目回数 */
+.dice-total-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* 集計項目 */
+.dice-total-area > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px;
+  background: var(--ink2);
+  border: 1px solid var(--line);
+}
+
+/* 集計ラベル */
+.dice-total-area span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* 集計結果 */
+.dice-total-area strong {
+  font-family: var(--mono);
+  font-size: 24px;
+  color: var(--orange);
+}
+
+/* RESETボタン */
+#dice-reset {
+  display: block;
+  margin: 18px 0 0 auto;
+  padding: 9px 18px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+#dice-reset:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+/* スマートフォン表示 */
+@media (max-width: 768px) {
+  .dice-count-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ======================================
+   ZODIAC COUNTER（星座耐久カウンター）
+   12星座の回答人数を表示するエリア
+====================================== */
+
+/* 12星座の一覧：PCでは3列 */
+.zodiac-count-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* 星座1種類ごとのカード */
+.zodiac-count-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 8px;
+  padding: 14px;
+  background: var(--ink2);
+  border: 1px solid var(--line);
+  transition: border-color .2s ease;
+}
+
+/* カードにマウスを乗せたとき */
+.zodiac-count-item:hover {
+  border-color: var(--orange);
+}
+
+/* 星座記号 */
+.zodiac-symbol {
+  grid-column: 1 / -1;
+  font-size: 25px;
+  line-height: 1;
+  color: var(--orange);
+  margin-bottom: 3px;
+}
+
+/* 星座名 */
+.zodiac-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+/* 回答人数 */
+.zodiac-count-item strong {
+  font-family: var(--mono);
+  font-size: 20px;
+  color: var(--orange);
+}
+
+/* 人数の単位 */
+.zodiac-unit {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ＋／−ボタン共通 */
+.zodiac-count-item button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--white);
+  cursor: pointer;
+  font-size: 15px;
+  transition: background .2s ease, color .2s ease;
+}
+
+/* ＋ボタン */
+.zodiac-count-item button[data-action="plus"]:hover {
+  background: var(--orange);
+  color: var(--ink);
+}
+
+/* −ボタン */
+.zodiac-count-item button[data-action="minus"]:hover {
+  background: var(--white);
+  color: var(--ink);
+}
+
+/* 総回答人数のエリア */
+.zodiac-total-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 20px;
+  padding: 18px;
+  background: var(--ink2);
+  border: 1px solid var(--line);
+}
+
+/* 総回答人数のラベル */
+.zodiac-total-area span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* 総回答人数の数字 */
+.zodiac-total-area strong {
+  font-family: var(--mono);
+  font-size: 26px;
+  color: var(--orange);
+}
+
+/* RESETボタン */
+#zodiac-reset {
+  display: block;
+  margin: 18px 0 0 auto;
+  padding: 9px 18px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+/* RESETボタンのホバー */
+#zodiac-reset:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+/* スマートフォン表示 */
+@media (max-width: 768px) {
+
+  /* スマホでは2列にする */
+  .zodiac-count-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  /* カード内の余白を少し小さくする */
+  .zodiac-count-item {
+    gap: 6px;
+    padding: 11px;
+  }
+
+  /* 星座記号を少し小さくする */
+  .zodiac-symbol {
+    font-size: 22px;
+  }
+
+}
+
+/* ======================================
+   LIVE TOOLS ACCORDION（配信ツール開閉機能）
+   各ツールの操作エリアを折りたたむ
+====================================== */
+
+/* アコーディオンの見出しボタン */
+.tool-accordion-toggle {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--white);
+  text-align: left;
+  cursor: pointer;
+}
+
+/* 見出しのタイトル */
+.tool-accordion-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* 見出しの番号 */
+.tool-accordion-toggle .tool-number {
+  width: 100%;
+}
+
+/* 開閉アイコン */
+.accordion-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  color: var(--orange);
+  font-size: 22px;
+  line-height: 1;
+  transition: transform .3s ease, background .3s ease;
+}
+
+/* マウスを乗せたとき */
+.tool-accordion-toggle:hover .accordion-icon {
+  background: var(--orange);
+  color: var(--ink);
+}
+
+/* 開いているときのアイコン */
+.tool-accordion-toggle[aria-expanded="true"] .accordion-icon {
+  transform: rotate(45deg);
+}
+
+/* 開閉するパネル */
+.tool-accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .4s ease;
+}
+
+/* パネルを開いた状態 */
+.live-tool-card.is-open .tool-accordion-panel {
+  grid-template-rows: 1fr;
+}
+
+/* パネル内部 */
+.tool-accordion-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* 開閉エリアの上部余白 */
+.live-tool-card.is-open .tool-accordion-inner {
+  padding-top: 24px;
+}
+
+/* 閉じているときは余白をなくす */
+.live-tool-card .tool-accordion-inner {
+  transition: padding .4s ease;
+}
+
+/* スマートフォン表示 */
+@media (max-width: 768px) {
+
+  .tool-accordion-title {
+    font-size: 17px;
+  }
+
+  .accordion-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+}
