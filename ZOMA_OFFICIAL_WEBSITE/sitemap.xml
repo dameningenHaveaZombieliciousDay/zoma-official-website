@@ -1,0 +1,17 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ==========================================
+     遅電ゾマ 公式サイト
+     XMLサイトマップ
+     Googleなどの検索エンジン向け
+========================================== -->
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- 公式サイト トップページ -->
+  <url>
+    <loc>https://zoma-official-website.pages.dev/</loc>
+  </url>
+
+</urlset>
