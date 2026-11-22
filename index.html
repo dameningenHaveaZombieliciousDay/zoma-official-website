@@ -1,0 +1,1182 @@
+
+<!DOCTYPE html>
+<!--
+  ==========================================
+  ZOMA / OFFICIAL WEBSITE
+  メインHTMLファイル
+  ==========================================
+
+  HTML（エイチティーエムエル）
+  Webサイトの骨組み・文章・画像・リンクを担当する。
+
+  関連ファイル：
+  style.css  → デザイン・色・配置
+  script.js  → メニューなどの動作
+-->
+
+<!-- lang="ja"：このページの基本言語を日本語に設定 -->
+<html lang="ja">
+
+<head>
+  <!-- ======================================
+       HEAD（ヘッド）
+       サイトの基本情報・外部ファイルの読み込み
+       ブラウザ画面には直接表示されない部分
+  ======================================= -->
+
+  <!-- 文字コードをUTF-8に設定。日本語の文字化けを防ぐ -->
+  <meta charset="UTF-8">
+
+  <!-- VIEWPORT（ビューポート）
+       スマートフォンなどの画面幅に合わせて表示する設定 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- THEME COLOR（テーマカラー）
+       対応ブラウザのUIに使われる色 -->
+  <meta name="theme-color" content="#171717">
+
+  <!-- META DESCRIPTION（メタディスクリプション）
+       検索結果などで表示されるサイトの説明文 -->
+  <meta name="description"
+        content="遅電ゾマ / ZOMA Official Website. 深夜活動系ゾンビVライバー。">
+
+  <!-- TITLE（タイトル）
+       ブラウザのタブや検索結果に使われるページタイトル -->
+  <title>ZOMA / OFFICIAL WEBSITE</title>
+
+  <!-- ======================================
+       GOOGLE FONTS（グーグルフォント）
+       外部のフォントを読み込む設定
+  ======================================= -->
+
+  <!-- Google Fontsとの接続を事前に準備して読み込みを効率化 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!--
+    使用するフォント：
+
+    DM Mono
+    読み：ディーエム・モノ
+    用途：英数字・機械的な表示
+
+    Manrope
+    読み：マンロープ
+    用途：英語見出し・タイトル
+
+    Noto Sans JP
+    読み：ノト・サンズ・ジェイピー
+    用途：日本語の文章
+
+    wght：フォントの太さ
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap"
+        rel="stylesheet">
+
+  <!-- CSS（シーエスエス）
+       style.cssからデザインを読み込む -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- JavaScript（ジャバスクリプト）
+       script.jsから機能・動作を読み込む
+
+       defer（ディファー）：
+       HTMLの読み込みを邪魔せず、読み込み後に実行する -->
+  <script src="script.js" defer></script>
+</head>
+
+
+<body>
+  <!-- ======================================
+       BODY（ボディ）
+       実際にブラウザ画面に表示される部分
+  ======================================= -->
+
+
+  <!-- ======================================
+       PAGE PROGRESS（ページプログレス）
+       ページのスクロール進行状況を表示する領域
+  ======================================= -->
+  <div class="page-progress" aria-hidden="true"></div>
+
+
+  <!-- ======================================
+       HEADER（ヘッダー）
+       サイト上部のロゴ・メニュー・SNSリンク
+  ======================================= -->
+  <header class="site-header">
+
+    <!-- BRAND（ブランド）
+         ロゴとサイト名を表示するリンク -->
+    <a class="brand" href="#home" aria-label="ZOMA home">
+
+      <!-- BRAND MARK（ブランドマーク） -->
+      <span class="brand-mark">Z.</span>
+
+      <!-- BRAND NAME（ブランドネーム） -->
+      <span class="brand-name">
+        ZOMA
+        <small>OFFICIAL WEBSITE</small>
+      </span>
+    </a>
+
+
+    <!-- MENU TOGGLE（メニュートグル）
+         スマートフォン用メニューの開閉ボタン -->
+    <button class="menu-toggle"
+            aria-label="メニューを開く"
+            aria-expanded="false">
+
+      <span></span>
+      <span></span>
+    </button>
+
+
+    <!-- NAVIGATION（ナビゲーション）
+         サイト内の各項目へ移動するメニュー -->
+    <nav class="main-nav" aria-label="メインナビゲーション">
+
+      <a href="#about">ABOUT</a>
+      <a href="#profile">PROFILE</a>
+      <a href="#activity">ACTIVITY</a>
+      <a href="#visual">VISUAL</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+
+
+    <!-- HEADER CTA（ヘッダー・シーティーエー）
+         Xのフォローを促すボタン -->
+    <a class="header-cta"
+       href="https://x.com/chiden_zoma"
+       target="_blank"
+       rel="noopener">
+
+      FOLLOW X <span>↗</span>
+    </a>
+
+  </header>
+
+
+
+  <!-- ======================================
+       MAIN（メイン）
+       サイトの主要コンテンツ
+  ======================================= -->
+  <main>
+
+
+    <!-- ======================================
+         HERO SECTION（ヒーローセクション）
+         サイトを開いたとき最初に目に入るメイン画面
+    ======================================= -->
+    <section class="hero" id="home">
+
+      <!-- 背景の装飾用グリッド -->
+      <div class="hero-grid" aria-hidden="true"></div>
+
+
+      <!-- HERO COPY（ヒーローコピー） -->
+      <div class="hero-copy">
+
+        <p class="eyebrow">
+          <span class="status-dot"></span>
+          VIRTUAL LIVER / CREATOR
+        </p>
+
+
+       <!-- メインロゴ：サイトの顔になるロゴ画像 -->
+<div class="hero-logo">
+  <img
+    src="images/logo/zoma-logo-01.png"
+    alt="遅電ゾマ ロゴ"
+  >
+</div>
+
+
+        <!-- メインキャッチコピー -->
+        <p class="hero-lead">
+          眠らない夜に、終わらない物語を。
+        </p>
+
+
+        <!-- サイトの紹介文 -->
+        <p class="hero-description">
+          深夜活動型ゾンビVライバー・遅電ゾマ。<br>
+          雑談、怪談、昆虫食。夜の片隅から活動中。
+        </p>
+
+
+        <!-- HERO ACTIONS（ヒーローアクション） -->
+        <div class="hero-actions">
+
+          <!-- PROFILEへ移動するボタン -->
+          <a class="button button-dark" href="#profile">
+            EXPLORE ZOMA <span>↗</span>
+          </a>
+
+          <!-- Xのプロフィールへ移動するリンク -->
+          <a class="text-link"
+             href="https://x.com/chiden_zoma"
+             target="_blank"
+             rel="noopener">
+            FOLLOW ON X <span>↗</span>
+          </a>
+
+        </div>
+      </div>
+
+
+
+      <!-- ====================================
+           HERO ART（ヒーローアート）
+           メインビジュアルの掲載エリア
+      ===================================== -->
+      <div class="hero-art" aria-label="キャラクタービジュアル掲載エリア">
+
+        <div class="art-frame">
+
+          <!-- 装飾用の円形オブジェクト -->
+          <div class="art-orbit orbit-one"></div>
+          <div class="art-orbit orbit-two"></div>
+
+          <!-- 装飾用のプラス記号 -->
+          <div class="art-cross">＋</div>
+
+          <!-- ビジュアルの管理番号 -->
+          <div class="art-index">NO. 001 / ZOMA</div>
+
+
+          <!-- メインビジュアル：ゾマの立ち絵 -->
+          <div class="art-placeholder">
+
+            <img
+              src="images/main/zoma-main-01.png"
+              alt="遅電ゾマのメイン立ち絵"
+              class="main-character"
+            >
+
+          </div>
+
+
+          <!-- ビジュアル横の装飾文字 -->
+          <div class="art-side-label">
+            NIGHT SHIFT<br>
+            NEVER ENDS
+          </div>
+
+        </div>
+
+
+       <!-- HERO SD CHARACTER（SDキャラクター） -->
+<div class="hero-sd">
+  <img
+    src="images/sd/zoma-sd-09.png"
+    alt="遅電ゾマのSDイラスト"
+  >
+</div>
+
+
+      <!-- HERO BOTTOM（ヒーローボトム） -->
+      <div class="hero-bottom">
+        <span>SCROLL TO DISCOVER</span>
+        <span class="scroll-line"></span>
+        <span>EST. 2026</span>
+      </div>
+
+    </section>
+
+
+
+    <!-- ======================================
+         TICKER（ティッカー）
+         横方向に流れるキーワードの装飾エリア
+    ======================================= -->
+    <section class="ticker" aria-label="キーワード">
+
+      <div class="ticker-track">
+
+        <span>VIRTUAL LIVER</span>
+        <b>✳</b>
+        <span>NIGHT CREATURE</span>
+        <b>✳</b>
+        <span>STAY UNDEAD</span>
+        <b>✳</b>
+
+        <!-- 同じ文字列を繰り返して横スクロールを演出 -->
+        <span>VIRTUAL LIVER</span>
+        <b>✳</b>
+        <span>NIGHT CREATURE</span>
+        <b>✳</b>
+        <span>STAY UNDEAD</span>
+        <b>✳</b>
+
+      </div>
+    </section>
+
+
+
+    <!-- ======================================
+         ABOUT SECTION（アバウトセクション）
+         遅電ゾマが何者なのかを紹介する部分
+    ======================================= -->
+    <section class="section about-section" id="about">
+
+      <div class="section-kicker">
+        <span>01 / ABOUT</span>
+        <span>INTRODUCTION</span>
+      </div>
+
+
+      <!-- ABOUT LAYOUT（アバウトレイアウト） -->
+      <div class="about-layout">
+
+        <!-- ABOUT TITLE（アバウトタイトル） -->
+        <div>
+          <p class="overline">WHO IS ZOMA?</p>
+
+          <h2>
+            夜更かしに<br>
+            付き添う、<br>
+            <span>アンデッド。</span>
+          </h2>
+        </div>
+
+
+        <!-- ABOUT TEXT（アバウトテキスト） -->
+        <div class="about-text">
+
+          <p class="lead">
+            遅電ゾマ — 深夜活動型のゾンビ系Vライバー
+          </p>
+
+          <p>
+            怪談やゲーム配信、何気ない日常の雑談まで。
+            夜にふらりと現れ、あなたの夜更かしに付き添います。
+          </p>
+
+          <p>
+            この毎日に少しだけの永遠を。
+            深夜活動は終わらない。
+          </p>
+
+          <!-- PROFILEへの内部リンク -->
+          <a class="underlined-link" href="#profile">
+            DISCOVER THE PROFILE <span>↗</span>
+          </a>
+
+        </div>
+      </div>
+
+
+      <!-- ABOUT FACTS（アバウトファクツ）
+           身長・誕生日などのプロフィール数値 -->
+      <div class="about-facts">
+
+        <div>
+          <strong>173<span>cm</span></strong>
+          <small>HEIGHT</small>
+        </div>
+
+        <div>
+          <strong>04<span>/</span>10</strong>
+          <small>BIRTHDAY</small>
+        </div>
+
+        <div>
+          <strong>∞</strong>
+          <small>ALLOTTED TIME*</small>
+        </div>
+
+        <p>* 事務所からクビはあります。</p>
+
+      </div>
+    </section>
+
+
+
+    <!-- ======================================
+         PROFILE SECTION（プロフィールセクション）
+         キャラクターの詳しい情報を紹介する部分
+    ======================================= -->
+    <section class="profile-section" id="profile">
+
+      <div class="section-kicker light">
+        <span>02 / PROFILE</span>
+        <span>CHARACTER FILE</span>
+      </div>
+
+
+      <!-- PROFILE LAYOUT（プロフィールレイアウト） -->
+      <div class="profile-layout">
+
+
+       <!-- PROFILE VISUAL（プロフィールビジュアル） -->
+<div class="profile-visual">
+
+  <div class="profile-visual-inner">
+
+    <!-- 管理番号 -->
+    <span class="file-number">FILE_001</span>
+
+    <!-- プロフィール用の立ち絵 -->
+    <img
+      src="images/main/zoma-main-01.png"
+      alt="遅電ゾマのキャラクター立ち絵"
+      class="profile-character"
+    >
+
+  </div>
+</div>
+
+
+
+        <!-- PROFILE INFO（プロフィールインフォ） -->
+        <div class="profile-info">
+
+          <p class="overline orange">IDENTITY / 001</p>
+
+          <!-- キャラクター名 -->
+          <h2>遅電 <span>ゾマ</span></h2>
+
+          <!-- 英語表記 -->
+          <p class="profile-en">CHIDEN ZOMA</p>
+
+          <!-- キャラクター紹介 -->
+          <p class="profile-desc">
+            ポジティブ系アンデッド。深夜徘徊とゲーム、
+            エナジードリンクを愛するゾンビ。
+            朝でも夜でも、挨拶は「おはゾマ〜」。
+          </p>
+
+
+          <!-- DL（ディーエル）
+               Description List（説明リスト） -->
+          <dl>
+
+            <div>
+              <dt>TYPE</dt>
+              <dd>ゾンビ系Vライバー</dd>
+            </div>
+
+            <div>
+              <dt>HEIGHT</dt>
+              <dd>173 cm</dd>
+            </div>
+
+            <div>
+              <dt>ACTIVITY</dt>
+              <dd>雑談 / 怪談 / 都市伝説 / GAME</dd>
+            </div>
+
+            <div>
+              <dt>BASE</dt>
+              <dd>深夜、ときどき早朝</dd>
+            </div>
+
+          </dl>
+
+
+          <!-- Xプロフィールへのリンク -->
+          <a class="button button-light"
+             href="https://x.com/chiden_zoma"
+             target="_blank"
+             rel="noopener">
+            MORE ABOUT ZOMA <span>↗</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- ======================================
+         ACTIVITY SECTION（アクティビティセクション）
+         SNS・配信・動画活動の紹介
+    ======================================= -->
+    <section class="section activity-section" id="activity">
+
+      <div class="section-kicker">
+        <span>03 / ACTIVITY</span>
+        <span>FOLLOW THE SIGNAL</span>
+      </div>
+
+
+      <!-- SECTION HEADING（セクションヘディング）
+           見出しと補足説明 -->
+      <div class="section-heading">
+
+        <div>
+          <p class="overline">WHERE TO FIND ME</p>
+
+          <h2>
+            STAY<br>
+            <span>CONNECTED.</span>
+          </h2>
+        </div>
+
+        <p>
+          配信も、動画も、日々のつぶやきも。<br>
+          各プラットフォームで活動中。
+        </p>
+
+      </div>
+
+
+      <!-- ACTIVITY GRID（アクティビティグリッド）
+           SNSなどのカードを並べる領域 -->
+      <div class="activity-grid">
+
+
+        <!-- Xの紹介カード -->
+        <a class="activity-card"
+           href="https://x.com/chiden_zoma"
+           target="_blank"
+           rel="noopener">
+
+          <span class="card-index">01 / SOCIAL</span>
+          <span class="activity-icon">𝕏</span>
+
+          <h3>X</h3>
+          <p>日々のお知らせ・交流・最新情報。</p>
+
+          <span class="card-arrow">↗</span>
+        </a>
+
+
+       <!-- IRIAMの紹介カード
+             現在は仮リンク。後から公式プロフィールURLに変更する -->
+        <a class="activity-card" href="https://web.iriam.app/s/user/b7bkVHZ38E?uuid=3ed5beb4">
+
+          <span class="card-index">02 / LIVE</span>
+          <span class="activity-icon">◉</span>
+
+          <h3>IRIAM</h3>
+          <p>深夜を中心にライブ配信。</p>
+
+          <span class="card-arrow">↗</span>
+        </a>
+
+
+        <!-- YouTubeの紹介カード
+             公式YouTubeチャンネルへ移動するリンク -->
+        <a class="activity-card"
+           href="https://www.youtube.com/channel/UCX6lbOJP90YuvxEv9HGl_ZA"
+           target="_blank"
+           rel="noopener noreferrer">
+
+          <span class="card-index">03 / VIDEO</span>
+          <span class="activity-icon">▶</span>
+
+          <h3>YOUTUBE</h3>
+          <p>ゲーム実況・動画コンテンツ。</p>
+
+          <span class="card-arrow">↗</span>
+        </a>
+
+
+      </div>
+      <!-- ACTIVITY GRID 終了 -->
+
+
+    </section>
+    <!-- ACTIVITY SECTION 終了 -->
+
+
+
+    <!-- ======================================
+         VISUAL SECTION（ビジュアルセクション）
+         イラスト・立ち絵・制作物などの展示エリア
+    ======================================= -->
+    <section class="visual-section" id="visual">
+
+
+      <!-- VISUAL COPY（ビジュアルコピー）
+           セクションのタイトル・説明文 -->
+      <div class="visual-copy">
+
+        <p class="overline orange">04 / VISUAL ARCHIVE</p>
+
+        <h2>
+          THE WORLD<br>
+          OF <span>ZOMA.</span>
+        </h2>
+
+        <p>
+          ビジュアル、イラスト、制作物。<br>
+          ゾマを形づくるクリエイティブをアーカイブ。
+        </p>
+
+        <span class="coming-soon">
+          VISUAL ARCHIVE / COMING SOON
+        </span>
+
+      </div>
+
+
+<!-- VISUAL SLIDER（ビジュアルスライダー）
+     イラストを横方向にスライド表示するエリア -->
+<div class="visual-slider">
+
+  <!-- スライドを横に並べる表示窓 -->
+  <div class="visual-track">
+
+    <!-- 作品01 -->
+    <div class="visual-slide">
+      <img src="images/visual/visual-01.jpg" alt="ゾマのイラスト01">
+    </div>
+
+    <!-- 作品02 -->
+    <div class="visual-slide">
+      <img src="images/visual/visual-02.png" alt="ゾマのイラスト02">
+    </div>
+
+    <!-- 作品03 -->
+    <div class="visual-slide">
+      <img src="images/visual/visual-03.png" alt="ゾマのイラスト03">
+    </div>
+
+    <!-- 作品04 -->
+    <div class="visual-slide">
+      <img src="images/visual/visual-04.png" alt="ゾマのイラスト04">
+    </div>
+
+    <!-- 作品05 -->
+    <div class="visual-slide">
+      <img src="images/visual/visual-05.png" alt="ゾマのイラスト05">
+    </div>
+
+    <!-- 作品06 -->
+    <div class="visual-slide">
+      <img src="images/visual/visual-06.png" alt="ゾマのイラスト06">
+    </div>
+
+  </div>
+
+  <!-- スライド操作エリア -->
+  <div class="visual-controls">
+
+    <button class="visual-prev" type="button" aria-label="前の作品">
+      ←
+    </button>
+
+    <span class="visual-counter">01 / 06</span>
+
+    <button class="visual-next" type="button" aria-label="次の作品">
+      →
+    </button>
+
+  </div>
+
+</div>
+
+</section> <!-- VISUAL SECTION終了 -->
+
+
+<!-- ======================================
+     CONTACT SECTION（コンタクトセクション）
+     案件・仕事・コラボレーションの窓口
+======================================= -->
+<section class="contact-section" id="contact">
+
+      <div class="section-kicker light">
+        <span>05 / CONTACT</span>
+        <span>LET'S CONNECT</span>
+      </div>
+
+
+      <!-- 問い合わせの分類 -->
+      <p class="overline orange">
+        BUSINESS / COLLABORATION
+      </p>
+
+
+      <!-- 問い合わせを促すメインタイトル -->
+      <h2>
+        HAVE A<br>
+        <em>GOOD NIGHT.</em>
+      </h2>
+
+
+      <!-- 問い合わせ方法の説明 -->
+      <p class="contact-lead">
+        お仕事・案件・コラボのご相談は、
+        XのDMよりご連絡ください。
+      </p>
+
+
+      <!-- XのDM・プロフィールへのリンク -->
+      <a class="button button-orange"
+         href="https://x.com/chiden_zoma"
+         target="_blank"
+         rel="noopener">
+        CONTACT VIA X <span>↗</span>
+      </a>
+
+
+      <!-- 問い合わせに関する注意書き -->
+      <p class="contact-note">
+        ※ DMは事務所管理です。
+        内容により返信までお時間をいただく場合があります。
+      </p>
+
+   
+</section> <!-- CONTACT SECTION終了 -->
+
+
+<!-- ======================================
+     LIVE TOOLS SECTION（配信ツール）
+     配信企画で使用する専用ツールエリア
+======================================= -->
+<section class="live-tools-section" id="live-tools">
+
+  <!-- セクション上部の番号・ラベル -->
+  <div class="section-kicker light">
+    <span>06 / LIVE TOOLS</span>
+    <span>STREAM SUPPORT</span>
+  </div>
+
+  <!-- セクションタイトル -->
+  <div class="live-tools-heading">
+    <p class="overline orange">TOOLS FOR STREAMING</p>
+    <h2>STREAM<br><span>SUPPORT.</span></h2>
+    <p>配信企画をサポートする、<br>遅電ゾマ専用のライブツール。</p>
+  </div>
+
+  <!-- 各ツールの配置エリア -->
+  <div class="live-tools-grid">
+
+    <!-- ======================================
+         TOOL 01：入室耐久カウンター
+    ======================================= -->
+    <div class="live-tool-card">
+
+      <!-- 常に表示する見出し -->
+      <button class="tool-accordion-toggle" type="button" aria-expanded="false">
+        <span class="tool-number">01 / COUNTER</span>
+        <span class="tool-accordion-title">入室耐久カウンター</span>
+        <span class="accordion-icon">＋</span>
+      </button>
+
+      <p>配信への入室人数をカウント。</p>
+
+      <!-- 常に表示する集計結果 -->
+      <div class="counter-display">
+        <span id="entrance-count">0</span>
+        <small>VISITORS</small>
+      </div>
+
+      <!-- 開閉する操作エリア -->
+      <div class="tool-accordion-panel">
+        <div class="tool-accordion-inner">
+
+          <div class="counter-buttons">
+            <button id="entrance-minus" type="button">−</button>
+            <button id="entrance-plus" type="button">＋ 1</button>
+            <button id="entrance-reset" type="button">RESET</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ======================================
+         TOOL 02：都道府県耐久カウンター
+    ======================================= -->
+    <div class="live-tool-card prefecture-tool">
+
+      <button class="tool-accordion-toggle" type="button" aria-expanded="false">
+        <span class="tool-number">02 / JAPAN MAP</span>
+        <span class="tool-accordion-title">都道府県耐久カウンター</span>
+        <span class="accordion-icon">＋</span>
+      </button>
+
+      <p>全国47都道府県からの回答を記録。</p>
+
+      <!-- 常に表示する集計結果 -->
+      <div class="prefecture-summary">
+        <div class="prefecture-stat">
+          <span id="prefecture-completed">0</span>
+          <small>/ 47 PREFECTURES</small>
+        </div>
+        <div class="prefecture-stat">
+          <span id="prefecture-total">0</span>
+          <small>TOTAL ANSWERS</small>
+        </div>
+      </div>
+
+      <!-- 開閉する操作エリア -->
+      <div class="tool-accordion-panel">
+        <div class="tool-accordion-inner">
+
+          <!-- 都道府県の選択エリア -->
+          <div class="prefecture-input-area">
+            <label for="prefecture-select">都道府県を選択</label>
+
+            <select id="prefecture-select">
+              <option value="">都道府県を選んでください</option>
+              <option value="北海道">北海道</option>
+              <option value="青森県">青森県</option>
+              <option value="岩手県">岩手県</option>
+              <option value="宮城県">宮城県</option>
+              <option value="秋田県">秋田県</option>
+              <option value="山形県">山形県</option>
+              <option value="福島県">福島県</option>
+              <option value="茨城県">茨城県</option>
+              <option value="栃木県">栃木県</option>
+              <option value="群馬県">群馬県</option>
+              <option value="埼玉県">埼玉県</option>
+              <option value="千葉県">千葉県</option>
+              <option value="東京都">東京都</option>
+              <option value="神奈川県">神奈川県</option>
+              <option value="新潟県">新潟県</option>
+              <option value="富山県">富山県</option>
+              <option value="石川県">石川県</option>
+              <option value="福井県">福井県</option>
+              <option value="山梨県">山梨県</option>
+              <option value="長野県">長野県</option>
+              <option value="岐阜県">岐阜県</option>
+              <option value="静岡県">静岡県</option>
+              <option value="愛知県">愛知県</option>
+              <option value="三重県">三重県</option>
+              <option value="滋賀県">滋賀県</option>
+              <option value="京都府">京都府</option>
+              <option value="大阪府">大阪府</option>
+              <option value="兵庫県">兵庫県</option>
+              <option value="奈良県">奈良県</option>
+              <option value="和歌山県">和歌山県</option>
+              <option value="鳥取県">鳥取県</option>
+              <option value="島根県">島根県</option>
+              <option value="岡山県">岡山県</option>
+              <option value="広島県">広島県</option>
+              <option value="山口県">山口県</option>
+              <option value="徳島県">徳島県</option>
+              <option value="香川県">香川県</option>
+              <option value="愛媛県">愛媛県</option>
+              <option value="高知県">高知県</option>
+              <option value="福岡県">福岡県</option>
+              <option value="佐賀県">佐賀県</option>
+              <option value="長崎県">長崎県</option>
+              <option value="熊本県">熊本県</option>
+              <option value="大分県">大分県</option>
+              <option value="宮崎県">宮崎県</option>
+              <option value="鹿児島県">鹿児島県</option>
+              <option value="沖縄県">沖縄県</option>
+            </select>
+
+            <button id="prefecture-add" type="button">＋ 1人追加</button>
+          </div>
+
+          <!-- 日本地図 -->
+          <div class="prefecture-map-area">
+            <div class="prefecture-map-heading">
+              <span>JAPAN MAP</span>
+              <span>47 AREAS</span>
+            </div>
+
+            <div id="japan-map" class="japan-map">
+              <p>JAPAN MAP / LOADING</p>
+            </div>
+
+            <div class="map-legend">
+              <span class="legend-item">
+                <i class="legend-color answered"></i>
+                回答あり
+              </span>
+              <span class="legend-item">
+                <i class="legend-color unanswered"></i>
+                未回答
+              </span>
+            </div>
+          </div>
+
+          <!-- 都道府県別回答人数一覧 -->
+          <div class="prefecture-list-area">
+            <div class="prefecture-list-heading">
+              <span>ANSWER LIST</span>
+              <span>都道府県別回答人数</span>
+            </div>
+            <div id="prefecture-list" class="prefecture-list"></div>
+          </div>
+
+          <button id="prefecture-reset" class="prefecture-reset" type="button">
+            RESET ALL
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ======================================
+         TOOL 03：星座耐久カウンター
+    ======================================= -->
+    <div class="live-tool-card">
+
+      <button class="tool-accordion-toggle" type="button" aria-expanded="false">
+        <span class="tool-number">03 / ZODIAC</span>
+        <span class="tool-accordion-title">星座耐久カウンター</span>
+        <span class="accordion-icon">＋</span>
+      </button>
+
+      <p>配信に来てくれた人の星座を記録。</p>
+
+      <!-- 常に表示する集計結果 -->
+      <div class="zodiac-total-area">
+        <span>総回答人数</span>
+        <strong id="zodiac-total">0人</strong>
+      </div>
+
+      <!-- 開閉する操作エリア -->
+      <div class="tool-accordion-panel">
+        <div class="tool-accordion-inner">
+
+          <div class="zodiac-count-list">
+
+            <div class="zodiac-count-item">
+              <span class="zodiac-symbol">♈</span>
+              <span class="zodiac-name">牡羊座</span>
+              <strong id="zodiac-count-aries">0</strong>
+              <span class="zodiac-unit">人</span>
+              <button type="button" data-zodiac="aries" data-action="minus">−</button>
+              <button type="button" data-zodiac="aries" data-action="plus">＋</button>
+            </div>
+
+            <div class="zodiac-count-item">
+              <span class="zodiac-symbol">♉</span>
+              <span class="zodiac-name">牡牛座</span>
+              <strong id="zodiac-count-taurus">0</strong>
+              <span class="zodiac-unit">人</span>
+              <button type="button" data-zodiac="taurus" data-action="minus">−</button>
+              <button type="button" data-zodiac="taurus" data-action="plus">＋</button>
+            </div>
+
+            <div class="zodiac-count-item">
+              <span class="zodiac-symbol">♊</span>
+              <span class="zodiac-name">双子座</span>
+              <strong id="zodiac-count-gemini">0</strong>
+              <span class="zodiac-unit">人</span>
+              <button type="button" data-zodiac="gemini" data-action="minus">−</button>
+              <button type="button" data-zodiac="gemini" data-action="plus">＋</button>
+            </div>
+
+            <div class="zodiac-count-item">
+              <span class="zodiac-symbol">♋</span>
+              <span class="zodiac-name">蟹座</span>
+              <strong id="zodiac-count-cancer">0</strong>
+              <span class="zodiac-unit">人</span>
+              <button type="button" data-zodiac="cancer" data-action="minus">−</button>
+              <button type="button" data-zodiac="cancer" data-action="plus">＋</button>
+            </div>
+
+            <div class="zodiac-count-item">
+              <span class="zodiac-symbol">♌</span>
+              <span class="zodiac-name">獅子座</span>
+              <strong id="zodiac-count-leo">0</strong>
+              <span class="zodiac-unit">人</span>
+              <button type="button" data-zodiac="leo" data-action="minus">−</button>
+              <button type="button" data-zodiac="leo" data-action="plus">＋</button>
+            </div>
+
+            <div class="zodiac-count-item">
+              <span class="zodiac-symbol">♍</span>
+              <span class="zodiac-name">乙女座</span>
+              <strong id="zodiac-count-virgo">0</strong>
+              <span class="zodiac-unit">人</span>
+              <button type="button" data-zodiac="virgo" data-action="minus">−</button>
+              <button type="button" data-zodiac="virgo" data-action="plus">＋</button>
+            </div>
+
+            <div class="zodiac-count-item">
+              <span class="zodiac-symbol">♎</span>
+              <span class="zodiac-name">天秤座</span>
+              <strong id="zodiac-count-libra">0</strong>
+              <span class="zodiac-unit">人</span>
+              <button type="button" data-zodiac="libra" data-action="minus">−</button>
+              <button type="button" data-zodiac="libra" data-action="plus">＋</button>
+            </div>
+
+            <div class="zodiac-count-item">
+              <span class="zodiac-symbol">♏</span>
+              <span class="zodiac-name">蠍座</span>
+              <strong id="zodiac-count-scorpio">0</strong>
+              <span class="zodiac-unit">人</span>
+              <button type="button" data-zodiac="scorpio" data-action="minus">−</button>
+              <button type="button" data-zodiac="scorpio" data-action="plus">＋</button>
+            </div>
+
+            <div class="zodiac-count-item">
+              <span class="zodiac-symbol">♐</span>
+              <span class="zodiac-name">射手座</span>
+              <strong id="zodiac-count-sagittarius">0</strong>
+              <span class="zodiac-unit">人</span>
+              <button type="button" data-zodiac="sagittarius" data-action="minus">−</button>
+              <button type="button" data-zodiac="sagittarius" data-action="plus">＋</button>
+            </div>
+
+            <div class="zodiac-count-item">
+              <span class="zodiac-symbol">♑</span>
+              <span class="zodiac-name">山羊座</span>
+              <strong id="zodiac-count-capricorn">0</strong>
+              <span class="zodiac-unit">人</span>
+              <button type="button" data-zodiac="capricorn" data-action="minus">−</button>
+              <button type="button" data-zodiac="capricorn" data-action="plus">＋</button>
+            </div>
+
+            <div class="zodiac-count-item">
+              <span class="zodiac-symbol">♒</span>
+              <span class="zodiac-name">水瓶座</span>
+              <strong id="zodiac-count-aquarius">0</strong>
+              <span class="zodiac-unit">人</span>
+              <button type="button" data-zodiac="aquarius" data-action="minus">−</button>
+              <button type="button" data-zodiac="aquarius" data-action="plus">＋</button>
+            </div>
+
+            <div class="zodiac-count-item">
+              <span class="zodiac-symbol">♓</span>
+              <span class="zodiac-name">魚座</span>
+              <strong id="zodiac-count-pisces">0</strong>
+              <span class="zodiac-unit">人</span>
+              <button type="button" data-zodiac="pisces" data-action="minus">−</button>
+              <button type="button" data-zodiac="pisces" data-action="plus">＋</button>
+            </div>
+
+          </div>
+
+          <button id="zodiac-reset" type="button">RESET</button>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ======================================
+         TOOL 04：予算ダイスカウンター
+    ======================================= -->
+    <div class="live-tool-card">
+
+      <button class="tool-accordion-toggle" type="button" aria-expanded="false">
+        <span class="tool-number">04 / DICE</span>
+        <span class="tool-accordion-title">予算ダイスカウンター</span>
+        <span class="accordion-icon">＋</span>
+      </button>
+
+      <p>硬貨の出目回数と合計金額を計算。</p>
+
+      <!-- 常に表示する集計結果 -->
+      <div class="dice-total-area">
+        <div>
+          <span>合計金額</span>
+          <strong id="dice-total">0円</strong>
+        </div>
+        <div>
+          <span>総出目回数</span>
+          <strong id="dice-roll-total">0回</strong>
+        </div>
+      </div>
+
+      <!-- 開閉する操作エリア -->
+      <div class="tool-accordion-panel">
+        <div class="tool-accordion-inner">
+
+          <div class="dice-count-list">
+
+            <div class="dice-count-item">
+              <span>1円</span>
+              <strong id="dice-count-1">0</strong>
+              <span>回</span>
+              <button type="button" data-coin="1" data-action="minus">−</button>
+              <button type="button" data-coin="1" data-action="plus">＋</button>
+            </div>
+
+            <div class="dice-count-item">
+              <span>5円</span>
+              <strong id="dice-count-5">0</strong>
+              <span>回</span>
+              <button type="button" data-coin="5" data-action="minus">−</button>
+              <button type="button" data-coin="5" data-action="plus">＋</button>
+            </div>
+
+            <div class="dice-count-item">
+              <span>10円</span>
+              <strong id="dice-count-10">0</strong>
+              <span>回</span>
+              <button type="button" data-coin="10" data-action="minus">−</button>
+              <button type="button" data-coin="10" data-action="plus">＋</button>
+            </div>
+
+            <div class="dice-count-item">
+              <span>50円</span>
+              <strong id="dice-count-50">0</strong>
+              <span>回</span>
+              <button type="button" data-coin="50" data-action="minus">−</button>
+              <button type="button" data-coin="50" data-action="plus">＋</button>
+            </div>
+
+            <div class="dice-count-item">
+              <span>100円</span>
+              <strong id="dice-count-100">0</strong>
+              <span>回</span>
+              <button type="button" data-coin="100" data-action="minus">−</button>
+              <button type="button" data-coin="100" data-action="plus">＋</button>
+            </div>
+
+            <div class="dice-count-item">
+              <span>500円</span>
+              <strong id="dice-count-500">0</strong>
+              <span>回</span>
+              <button type="button" data-coin="500" data-action="minus">−</button>
+              <button type="button" data-coin="500" data-action="plus">＋</button>
+            </div>
+
+          </div>
+
+          <button id="dice-reset" type="button">RESET</button>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- ======================================
+       FOOTER（フッター）
+       サイト最下部の情報・著作権表示
+  ======================================= -->
+  <footer class="site-footer">
+
+
+    <!-- フッターのロゴ
+         クリックするとページ先頭へ戻る -->
+    <a class="footer-brand" href="#home">Z.</a>
+
+
+    <!-- サイト名と活動ジャンル -->
+    <div>
+      <strong>ZOMA / OFFICIAL WEBSITE</strong>
+
+      <small>
+        VIRTUAL LIVER · NIGHT CREATURE · EST. 2026
+      </small>
+    </div>
+
+
+    <!-- ページ先頭へ戻るリンク -->
+    <a href="#home" class="back-top">
+      BACK TO TOP ↑
+    </a>
+
+
+    <!-- COPYRIGHT（コピーライト）
+         著作権表示 -->
+    <small class="copyright">
+      © 2026 ZOMA. ALL RIGHTS RESERVED.
+    </small>
+
+  </footer>
+
+</body>
+</html>
